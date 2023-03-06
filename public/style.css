@@ -2,4 +2,21 @@
   margin: 0;
   box-sizing: border-box;
   background-color: rgb(223, 223, 223);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+input{
+  display: block;
+}
+
+.container{
+  width: 80vw;
+}
+
+
+#login-form input{
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 1rem 2rem;
 }
