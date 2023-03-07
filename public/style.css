@@ -12,6 +12,7 @@ input{
 
 .container{
   width: 80vw;
+  margin: 5rem auto;
 }
 
 
@@ -19,4 +20,25 @@ input{
   width: 100%;
   border: 1px solid #ccc;
   padding: 1rem 2rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+#login-form div{
+  margin: 0 auto;
+}
+
+
+
+button {
+  border-radius: 5px;
+  border: 1px solid #333;
+  width: 50%;
+  padding: 1rem;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #333;
+  color: #ccc;
 }
