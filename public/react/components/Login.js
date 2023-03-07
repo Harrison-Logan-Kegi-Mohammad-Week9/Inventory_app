@@ -12,7 +12,7 @@ export const Login = () => {
 	const [loggedIn, setLoggedIn] = useState(false)
 	
 
-	const submitHandler = async(e) =>{ //Need to fetch the Users model to verify the user (.findAll)
+	const submitHandler = async(e) =>{
 		e.preventDefault();
 
 		const dataToSend = {
@@ -29,6 +29,7 @@ export const Login = () => {
                dataToSend
             )
 		});
+		console.log(response)
 		if (response.status == 200){
 			setLoggedIn(true)
 		}else{
@@ -52,7 +53,7 @@ export const Login = () => {
 				</div>
 			</main>
 		)
-	}else{
+	}else{//Need to move to the main items menu/page
 		return <h1>LOGGED IN</h1>
 	}
 }
