@@ -15,13 +15,26 @@ export const Login = () => {
 	const submitHandler = async(e) =>{ //Need to fetch the Users model to verify the user (.findAll)
 		e.preventDefault();
 
-		/*
-		fetch () =>{
-			findAll.... where email = db email and where password = password
+		const dataToSend = {
+			email:email,
+			password:password
 		}
-		*/
 
-		setLoggedIn(true)
+		const response = await fetch(`${apiURL}/users/login`, {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+               dataToSend
+            )
+		});
+		if (response.status == 200){
+			setLoggedIn(true)
+		}else{
+			console.log(response)
+			window.alert("Email or Password is incorrect")
+		}
 	}
 
 	if (!loggedIn){
