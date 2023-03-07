@@ -1,31 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { SaucesList } from './SaucesList';
 import { useNavigate } from "react-router-dom";
 
 // import and prepend the api url to any fetch calls
 import apiURL from '../api';
-import { useSyncExternalStore } from 'react';
 
 export const Login = () => {
 	const navigate = useNavigate()
-
-	// const [sauces, setSauces] = useState([]);
-	// console.log(sauces)
-
-	// async function fetchSauces(){
-	// 	try {
-	// 		const response = await fetch(`${apiURL}/sauces`);
-	// 		const saucesData = await response.json();
-			
-	// 		setSauces(saucesData);
-	// 	} catch (err) {
-	// 		console.log("Oh no an error! ", err)
-	// 	}
-	// }
-
-	// useEffect(() => {
-	// 	fetchSauces();
-	// }, []);
 
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -34,8 +14,13 @@ export const Login = () => {
 
 	const submitHandler = async(e) =>{ //Need to fetch the Users model to verify the user (.findAll)
 		e.preventDefault();
-		console.log(email)
-		console.log(password)
+
+		/*
+		fetch () =>{
+			findAll.... where email = db email and where password = password
+		}
+		*/
+
 		setLoggedIn(true)
 	}
 
