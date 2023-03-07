@@ -1,7 +1,7 @@
 const {Sequelize} = require('sequelize')
 const {sequelize} = require('../db')
 
-const Sauce = sequelize.define("sauces", {
+const Item = sequelize.define("items", {
   name: Sequelize.STRING,
   image: Sequelize.STRING,
 });
