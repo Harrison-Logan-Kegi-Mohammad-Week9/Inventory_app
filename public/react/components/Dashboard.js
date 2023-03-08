@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import apiURL from '../api';
 import { useNavigate } from 'react-router-dom'
-
+import { AddForm } from './AddForm'
 export const Dashboard = () => {
   const [userData, setUserData] = useState(null);
   const [items, setItems] = useState([])
@@ -40,7 +40,7 @@ export const Dashboard = () => {
     </div>
     <button onClick={() => setIsAddingItem(!isAddingItem)}>ADD ITEM</button>
     <button onClick={logout}>Logout</button>
-    {isAddingItem && <h1>Hello</h1>}
+    {isAddingItem && <AddForm/>}
     </>
   ): null
 };

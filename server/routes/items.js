@@ -31,9 +31,9 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    const { name, description, price, category, image } = req.body;
+    const { title, description, price, category, image } = req.body;
     try {
-      const newItem = await Item.create({ name, description, price, category, image });
+      const newItem = await Item.create({ title, description, price, category, image });
       res.status(201).json(newItem);
     } catch (error) {
       res.status(400).json({ message: error.message });
@@ -43,11 +43,11 @@ router.post('/', async (req, res) => {
   // update item thingy.
 router.put('/:id', async (req, res) => {
     const itemId = req.params.id;
-    const { name, description, price, category, image } = req.body;
+    const { title, description, price, category, image } = req.body;
     try {
       const item = await Item.findByPk(itemId);
       if (item) {
-        item.name = name;
+        item.title = title;
         item.description = description;
         item.price = price;
         item.category = category;
