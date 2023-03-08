@@ -6,7 +6,6 @@ export const Dashboard = () => {
   const [userData, setUserData] = useState(null);
   const [items, setItems] = useState([])
   const [isAddingItem, setIsAddingItem] = useState(false)
-  console.log(items)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -25,7 +24,7 @@ export const Dashboard = () => {
     }
     fetchItems();
     fetchUserData();
-  }, []);
+  }, [isAddingItem]);
 
   const logout = () => {
     sessionStorage.removeItem('email')
@@ -40,7 +39,7 @@ export const Dashboard = () => {
     </div>
     <button onClick={() => setIsAddingItem(!isAddingItem)}>ADD ITEM</button>
     <button onClick={logout}>Logout</button>
-    {isAddingItem && <AddForm/>}
+    {isAddingItem && <AddForm setIsAddingItem={setIsAddingItem}/>}
     </>
   ): null
 };
