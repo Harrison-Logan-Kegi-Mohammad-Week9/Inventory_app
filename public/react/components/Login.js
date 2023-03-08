@@ -54,6 +54,7 @@ export const Login = () => {
 			</main>
 		)
 	}else{//Need to move to the main items menu/page
-		return <h1>LOGGED IN</h1>
+		sessionStorage.setItem('email', JSON.stringify(email))
+		navigate('/dashboard')
 	}
 }

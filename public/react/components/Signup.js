@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import apiURL from '../api';
+import { useNavigate } from "react-router-dom";
+
+
 
 
 export const Signup = () =>{
+	const navigate = useNavigate()
 
     const [signup, setSignup] = useState(false)
     const [name, setName] = useState('');
@@ -31,13 +35,13 @@ export const Signup = () =>{
 		    });
 
 		    if (response.status != 201){
-		    	window.alert("Error has occured")
+		    	window.alert("Account already exists")
 		    }else{
                 setSignup(true)
             }
         }
         catch(e){
-            window.alert("Account already exists")
+            window.alert("Error")
         }
     }
 
@@ -59,6 +63,7 @@ export const Signup = () =>{
             </main>
         )
     }else{
-        return <h2>LOGGED IN</h2>
+		sessionStorage.setItem('email', JSON.stringify(email))
+        navigate('/dashboard')
     }
 }

@@ -42,3 +42,12 @@ button:hover {
   background-color: #333;
   color: #ccc;
 }
+
+.items-dashboard{
+  max-width: 5%;
+}
+
+.items-box {
+  width: 100%;
+  height: 200px
+}

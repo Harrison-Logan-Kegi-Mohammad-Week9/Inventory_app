@@ -18,6 +18,21 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.get('/:email', async (req, res) => {
+  try {
+    const user = await User.findAll({
+      where: {email: req.params.email}
+    });
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ message: 'Items not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+})
+
 
  // Express route make new user
  router.post("/signup", async (req, res) => {
