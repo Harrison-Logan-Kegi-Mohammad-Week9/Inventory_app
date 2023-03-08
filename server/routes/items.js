@@ -1,5 +1,6 @@
 //  express route to get one item by ID.
 const express = require('express');
+const {check, validationResult} = require("express-validator");
 const router = express.Router();
 const {Item} = require('../models/index');
 
@@ -30,13 +31,18 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-router.post('/', async (req, res) => {
-    const { title, description, price, category, image } = req.body;
-    try {
-      const newItem = await Item.create({ title, description, price, category, image });
-      res.status(201).json(newItem);
-    } catch (error) {
-      res.status(400).json({ message: error.message });
+router.post('/',[check("title").not().isEmpty().trim(),check("price").not().isEmpty().trim(),check("category").not().isEmpty().trim()], async (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()){
+      res.status(400).json({errors})
+    }else{
+      const { title, description, price, category, image } = req.body;
+      try {
+        const newItem = await Item.create({ title, description, price, category, image });
+        res.status(201).json(newItem);
+      } catch (error) {
+        res.status(400).json({ message: error.message });
+      }
     }
   })
 

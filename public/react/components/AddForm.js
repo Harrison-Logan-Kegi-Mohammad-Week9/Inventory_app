@@ -9,8 +9,8 @@ export const AddForm = (props)=>{
     const [price, setPrice] = useState(0)
     const [category, setCategory] = useState('')
     const [image, setImage] = useState('')
-    const [url, setURL] = useState('')
-    console.log(url)
+    const [url, setURL] = useState('https://static.thenounproject.com/png/778835-200.png')
+    const [error, setError] = useState(false)
 
     const uploadImage = async(e) =>{
         try{
@@ -24,7 +24,6 @@ export const AddForm = (props)=>{
                 body: data
             })
             const urlData = await response.json()
-            console.log(urlData)
             setURL(urlData.url)
         }
         catch(e){
@@ -52,30 +51,35 @@ export const AddForm = (props)=>{
                    dataToSend
                 )
             });
-            props.setIsAddingItem(false)
+            if (response.status == 400){
+                setError(true)
+            }else{
+                props.setIsAddingItem(false)
+            }
         }
         catch(e){
-            window.alert('Something went wrong :(')
+            window.alert('something went wrong :(')
         }
     }
 
     return (
         <main>	
             <div className='container'>
-            <form onSubmit={addForm}>
-                <label>Title</label><br></br>
-                <input type='text' placeholder='Enter Title' onChange={e => setTitle(e.target.value)}></input><br></br>
-                <label>Description</label><br></br>
-                <input type='text' placeholder='Enter Description' onChange={e => setDescription(e.target.value)}></input><br></br>
-                <label>Price</label><br></br>
-                <input type='number' placeholder='Enter Price' onChange={e => setPrice(e.target.value)}></input><br></br>
-                <label>Category</label><br></br>
-                <input type='text' placeholder='Enter Category' onChange={e => setCategory(e.target.value)}></input><br></br>
-                <label>Image</label><br></br>
-                <input type='file' placeholder='Enter Image' onChange={e => setImage(e.target.files[0])}></input><br></br>
-                <button onClick={uploadImage}>Upload</button>
-                <button type='submit' onClick={addForm}>Add item</button>
-            </form><br></br>
+                {error && <p id='error'>Please fill in all mandatory fields</p>}
+                <form onSubmit={addForm}>
+                    <label>Title<span id='mandatory'>*</span></label><br></br>
+                    <input type='text' placeholder='Enter Title' onChange={e => setTitle(e.target.value)}></input><br></br>
+                    <label>Description</label><br></br>
+                    <input type='text' placeholder='Enter Description' onChange={e => setDescription(e.target.value)}></input><br></br>
+                    <label>Price<span id='mandatory'>*</span></label><br></br>
+                    <input type='number' placeholder='Enter Price' onChange={e => setPrice(e.target.value)}></input><br></br>
+                    <label>Category<span id='mandatory'>*</span></label><br></br>
+                    <input type='text' placeholder='Enter Category' onChange={e => setCategory(e.target.value)}></input><br></br>
+                    <label>Image</label><br></br>
+                    <input type='file' placeholder='Enter Image' onChange={e => setImage(e.target.files[0])}></input><br></br>
+                    <button onClick={uploadImage}>Upload</button>
+                    <button type='submit' onClick={addForm}>Add item</button>
+                </form><br></br>
             </div>
         </main>
     )
