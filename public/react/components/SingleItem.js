@@ -15,7 +15,6 @@ export const SingleItem = () =>{
     useEffect(() => {
 
         const fetchItem = async () => {
-
             const response = await fetch(`${apiURL}/items/${id}`)
             const data = await response.json()
             console.log(data)
