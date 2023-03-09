@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import apiURL from '../api';
 import { useNavigate } from 'react-router-dom'
 import { AddForm } from './AddForm'
+import { SearchForm } from './SearchForm'
 export const Dashboard = () => {
   const [userData, setUserData] = useState(null);
   const [items, setItems] = useState([])
   const [isAddingItem, setIsAddingItem] = useState(false)
+  const [isSearching, setIsSearching] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -24,7 +26,7 @@ export const Dashboard = () => {
     }
     fetchItems();
     fetchUserData();
-  }, [isAddingItem]);
+  }, [isAddingItem, isSearching]);
 
   const logout = () => {
     sessionStorage.removeItem('email')
@@ -48,8 +50,10 @@ export const Dashboard = () => {
         )}
       </div>
       <button onClick={() => setIsAddingItem(!isAddingItem)}>ADD ITEM</button>
+      <button onClick={() => setIsSearching(!isSearching)}>SEARCH</button>
       <button onClick={logout}>Logout</button>
       {isAddingItem && <AddForm setIsAddingItem={setIsAddingItem}/>}
+      {isSearching && <SearchForm setIsSearching={setIsSearching}/>}
     </>
   ): null
 };
