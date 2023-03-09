@@ -1,6 +1,5 @@
 // Sequelize Model for User
 const { sequelize, DataTypes } = require('../db')
-
     const User = sequelize.define("User", {
       username: {
         type: DataTypes.STRING,
@@ -20,5 +19,6 @@ const { sequelize, DataTypes } = require('../db')
         allowNull: false,
       },
       })
+
 
 module.exports = {User}

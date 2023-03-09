@@ -1,11 +1,20 @@
-  
+<!--   
+html items -->
+
+<!-- Front end view for single item. -->
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="/style.css" />
-    </head>
-    <body>
-        <div id="root"></div>
-        <script src="./react/index.js"></script>
-    </body>
+<head>
+  <title>Item</title>
+</head>
+<body>
+  <div>
+    <h2>{{ item.name }}</h2>
+    <p>{{ item.description }}</p>
+    <p>{{ item.price }}</p>
+    <p>{{ item.category }}</p>
+    <img src="{{ item.image }}" alt="{{ item.name }}">
+  </div>
+</body>
 </html>
+

@@ -31,6 +31,7 @@ router.get('/:id', async (req, res) => {
   }
 })
 
+
 router.post('/',[check("title").not().isEmpty().trim(),check("price").not().isEmpty().trim(),check("category").not().isEmpty().trim()], async (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()){
@@ -47,6 +48,7 @@ router.post('/',[check("title").not().isEmpty().trim(),check("price").not().isEm
   })
 
   // update item thingy.
+
 router.put('/:id', [check("title").not().isEmpty().trim(),check("price").not().isEmpty().trim(),check("category").not().isEmpty().trim()],async (req, res) => {
   const errors = validationResult(req)
     if (!errors.isEmpty()){
@@ -87,6 +89,5 @@ router.put('/:id', [check("title").not().isEmpty().trim(),check("price").not().i
 })
 
 
-
-
 module.exports = router;
+
