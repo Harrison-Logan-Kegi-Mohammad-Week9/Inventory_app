@@ -6,17 +6,30 @@
 }
 
 
-input{
+input {
   display: block;
 }
 
-.container{
-  width: 80vw;
-  margin: 5rem auto;
+.form-container {
+  width: 40vw;
+  height: 35rem;
+  border-radius: 10px;
+  margin-inline: auto;
+  padding-block: 5rem;
+  padding-inline: 3rem;
 }
 
 
-#login-form input{
+
+
+.form-bg {
+  background-color: darkslategray;
+  min-height: 100vh;
+  padding-block: 5rem;
+}
+
+
+.form input {
   width: 100%;
   border: 1px solid #ccc;
   padding: 1rem 2rem;
@@ -24,10 +37,14 @@ input{
   margin-top: 1rem;
 }
 
-#login-form div{
+.form div {
   margin: 0 auto;
 }
 
+.form button {
+  display: inline-block;
+
+}
 
 
 button {
@@ -43,7 +60,7 @@ button:hover {
   color: #ccc;
 }
 
-.items-dashboard{
+.items-dashboard {
   max-width: 5%;
 }
 
@@ -52,9 +69,17 @@ button:hover {
   height: 200px
 }
 
-#error{
-  color:red
+#error,
+#mandatory {
+  color: red
 }
-#mandatory{
-  color:red
+
+/* Media Queries */
+
+@media screen and (max-width: 450px) {
+  .form-container {
+    width: 50vw;
+    padding-block: 10rem;
+    padding-inline: 1rem;
+  }
 }

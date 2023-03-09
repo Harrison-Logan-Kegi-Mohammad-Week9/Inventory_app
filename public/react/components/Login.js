@@ -12,42 +12,40 @@ export const Login = () => {
 	const [loggedIn, setLoggedIn] = useState(false)
 	const [credentialsError, setCredentialsError] = useState(false)
 	const [fieldsError, setFieldsError] = useState(false)
-	
 
-	const submitHandler = async(e) =>{
+
+	const submitHandler = async (e) => {
 		e.preventDefault();
 
 		const dataToSend = {
-			email:email,
-			password:password
+			email: email,
+			password: password
 		}
 
 		const response = await fetch(`${apiURL}/users/login`, {
-            method: "POST",
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(
-               dataToSend
-            )
+			method: "POST",
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(
+				dataToSend
+			)
 		});
 		console.log(response)
-		if (response.status == 200){
+		if (response.status == 200) {
 			setLoggedIn(true)
-		}else if(response.status == 401){
+		} else if (response.status == 401) {
 			setCredentialsError(true)
 		}
 	}
 
-	if (!loggedIn){
+	if (!loggedIn) {
 		return (
-			<main>	
-				<div className='container'>
+			<main className='form-bg'>
+				<div className='form-container'>
 					{credentialsError && <p id='error'>Username or password is incorrect</p>}
-					<form onSubmit={submitHandler} id='login-form'>
-						<label>Email</label><br></br>
+					<form onSubmit={submitHandler} className='form'>
 						<input type='email' placeholder='Enter email' value={email} onChange={e => setEmail(e.target.value)}></input><br></br>
-						<label>Password</label><br></br>
 						<input type='password' placeholder='Enter password' value={password} onChange={e => setPassword(e.target.value)}></input><br></br>
 						<button type='submit'>Log in</button>
 					</form><br></br>
@@ -55,7 +53,7 @@ export const Login = () => {
 				</div>
 			</main>
 		)
-	}else{//Need to move to the main items menu/page
+	} else {//Need to move to the main items menu/page
 		sessionStorage.setItem('email', JSON.stringify(email))
 		navigate('/dashboard')
 	}
