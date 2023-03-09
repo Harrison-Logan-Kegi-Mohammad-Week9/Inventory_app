@@ -6,7 +6,7 @@ const { User } = require("../models/index");
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-// Express route get all users
+//GET all users
 router.get('/', async (req, res) => {
   try {
     const user = await User.findAll();
@@ -20,6 +20,7 @@ router.get('/', async (req, res) => {
   }
 })
 
+//GET specific User
 router.get('/:email', async (req, res) => {
   try {
     const user = await User.findAll({
@@ -36,7 +37,7 @@ router.get('/:email', async (req, res) => {
 })
 
 
- // Express route make new user
+ //Create new user
  router.post("/signup", [check("username").not().isEmpty().trim(),check("email").not().isEmpty().trim(),check("password").not().isEmpty().trim()],async (req, res) => {//Need to add in validation in (see items endpoint)
   const errors = validationResult(req)
   if (!errors.isEmpty()){
@@ -59,7 +60,7 @@ router.get('/:email', async (req, res) => {
   }
 })
 
-// Express route login user
+//Login user
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -79,7 +80,7 @@ router.post("/login", async (req, res) => {
   }
 })
 
-// Express route logout user
+//Logout user
 router.post("/logout", async (req, res) => {
   try {
     res.clearCookie("token");

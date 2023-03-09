@@ -4,6 +4,7 @@ const {check, validationResult} = require("express-validator");
 const router = express.Router();
 const {Item} = require('../models/index');
 
+//GET all items
 router.get('/', async (req, res) => {
   try {
     const item = await Item.findAll();
@@ -17,6 +18,7 @@ router.get('/', async (req, res) => {
   }
 })
 
+//GET specific item
 router.get('/:id', async (req, res) => {
   const itemId = req.params.id;
   try {
@@ -31,7 +33,7 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-
+//Create new Item
 router.post('/',[check("title").not().isEmpty().trim(),check("price").not().isEmpty().trim(),check("category").not().isEmpty().trim()], async (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()){
@@ -47,8 +49,7 @@ router.post('/',[check("title").not().isEmpty().trim(),check("price").not().isEm
     }
   })
 
-  // update item thingy.
-
+//PUT existing item
 router.put('/:id', [check("title").not().isEmpty().trim(),check("price").not().isEmpty().trim(),check("category").not().isEmpty().trim()],async (req, res) => {
   const errors = validationResult(req)
     if (!errors.isEmpty()){
@@ -75,6 +76,7 @@ router.put('/:id', [check("title").not().isEmpty().trim(),check("price").not().i
     }
   })
 
+  //DELETE existing item
   router.delete('/:id', async (req, res) => {
     try {
       const item = await Item.destroy({where: {id: req.params.id}})
@@ -86,6 +88,27 @@ router.put('/:id', [check("title").not().isEmpty().trim(),check("price").not().i
     } catch (error) {
       res.status(400).json({ message: error.message})
     }
+})
+
+//Filter Item list by category (BONUS - Tier 5)
+router.get('/search/:category', async (req, res) => {
+  const category = req.params.category
+  try {
+    const item = await Item.findAll({
+      where: {category: category}
+    });
+    console.log(item)
+    res.send(item)
+
+    //if (item) {
+    //  res.status(200).json(item);
+    //} else {
+    //  res.status(404).json({ message: 'Item not found' });
+    //  console.log(item)
+    //}
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 })
 
 
