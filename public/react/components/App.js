@@ -1,33 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { SaucesList } from './SaucesList';
+import { Routes, Route } from "react-router-dom";
 
 // import and prepend the api url to any fetch calls
-import apiURL from '../api';
+import apiURL from '../api'
+import { Dashboard } from './Dashboard';
+import { Login } from "./Login"
+import { Signup } from "./Signup"
+import { SingleItem } from "./SingleItem"
 
 export const App = () => {
-
-	const [sauces, setSauces] = useState([]);
-
-	async function fetchSauces(){
-		try {
-			const response = await fetch(`${apiURL}/sauces`);
-			const saucesData = await response.json();
-			
-			setSauces(saucesData);
-		} catch (err) {
-			console.log("Oh no an error! ", err)
-		}
-	}
-
-	useEffect(() => {
-		fetchSauces();
-	}, []);
-
-	return (
-		<main>	
-      <h1>Sauce Store</h1>
-			<h2>All things 🔥</h2>
-			<SaucesList sauces={sauces} />
-		</main>
-	)
+	return <>
+	<Routes>
+		<Route exact path="/" element={<Login />} />
+		<Route path="signup" element={<Signup/>} />
+		<Route path="dashboard" element={<Dashboard/>} />
+		<Route path="item" element={<SingleItem/>} />
+  </Routes>
+  </>
 }

@@ -1,5 +1,5 @@
 // Sequelize Model for User
-module.exports = (sequelize, DataTypes) => {
+const { sequelize, DataTypes } = require('../db')
     const User = sequelize.define("User", {
       username: {
         type: DataTypes.STRING,
@@ -19,12 +19,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       })
-  
-    User.associate = (models) => {
-      User.hasMany(models.Item);
-    }
-  
-    return User;
-  }
-  
- 
+
+
+module.exports = {User}
