@@ -8,6 +8,7 @@ export const Dashboard = () => {
   const [items, setItems] = useState([])
   const [isAddingItem, setIsAddingItem] = useState(false)
   const [isSearching, setIsSearching] = useState(false)
+  const [isFiltered, setIsFiltered] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -19,14 +20,16 @@ export const Dashboard = () => {
         setUserData(data[0]);
     };
 
-    const fetchItems = async () => {
+    const fetchItems = async () => {//find all results
       const response = await fetch(`${apiURL}/items`)
       const data = await response.json()
       setItems(data)
     }
-    fetchItems();
-    fetchUserData();
-  }, [isAddingItem, isSearching]);
+    if (isFiltered == false){
+      fetchItems();
+      fetchUserData();
+    }
+  }, [isAddingItem, isFiltered]);
 
   const logout = () => {
     sessionStorage.removeItem('email')
@@ -37,6 +40,10 @@ export const Dashboard = () => {
     console.log(id)
     sessionStorage.setItem('itemId', JSON.stringify(id))
     navigate('/item')
+  }
+
+  const removeFilter = () => {
+    setIsFiltered(false)
   }
 
   return userData ? (<>
@@ -52,8 +59,9 @@ export const Dashboard = () => {
       <button onClick={() => setIsAddingItem(!isAddingItem)}>ADD ITEM</button>
       <button onClick={() => setIsSearching(!isSearching)}>SEARCH</button>
       <button onClick={logout}>Logout</button>
+      {isFiltered && <button onClick={removeFilter}>Get All Results</button>}
       {isAddingItem && <AddForm setIsAddingItem={setIsAddingItem}/>}
-      {isSearching && <SearchForm setIsSearching={setIsSearching}/>}
+      {isSearching && <SearchForm setIsSearching={setIsSearching} setItems={setItems} setIsFiltered={setIsFiltered}/>}
     </>
   ): null
 };
