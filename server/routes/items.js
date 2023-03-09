@@ -97,15 +97,12 @@ router.get('/search/:category', async (req, res) => {
     const item = await Item.findAll({
       where: {category: category}
     });
-    console.log(item)
-    res.send(item)
-
-    //if (item) {
-    //  res.status(200).json(item);
-    //} else {
-    //  res.status(404).json({ message: 'Item not found' });
-    //  console.log(item)
-    //}
+    if (item) {
+      res.status(200).json(item);
+    } else {
+      res.status(404).json({ message: 'Item not found' });
+      console.log(item)
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

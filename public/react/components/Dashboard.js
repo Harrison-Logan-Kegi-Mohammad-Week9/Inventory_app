@@ -56,10 +56,10 @@ export const Dashboard = () => {
           </a>
         )}
       </div>
-      <button onClick={() => setIsAddingItem(!isAddingItem)}>ADD ITEM</button>
-      <button onClick={() => setIsSearching(!isSearching)}>SEARCH</button>
+      <button onClick={() => setIsAddingItem(!isAddingItem)}>ADD ITEM</button><br></br><br></br>
+      <button onClick={() => setIsSearching(!isSearching)}>SEARCH</button><br></br><br></br>
+      {isFiltered && <><button onClick={removeFilter}>Get All Results</button><br></br><br></br></>}
       <button onClick={logout}>Logout</button>
-      {isFiltered && <button onClick={removeFilter}>Get All Results</button>}
       {isAddingItem && <AddForm setIsAddingItem={setIsAddingItem}/>}
       {isSearching && <SearchForm setIsSearching={setIsSearching} setItems={setItems} setIsFiltered={setIsFiltered}/>}
     </>
