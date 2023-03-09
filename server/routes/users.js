@@ -36,20 +36,25 @@ router.get('/:email', async (req, res) => {
 
 
  // Express route make new user
- router.post("/signup", async (req, res) => {
-  try {
-    const { username, email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({
-      username,
-      email,
-      password: hashedPassword,
-    });
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
-    res.status(201).json({ user, token });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server Error" });
+ router.post("/signup", [check("username").not().isEmpty().trim(),check("email").not().isEmpty().trim(),check("password").not().isEmpty().trim()],async (req, res) => {//Need to add in validation in (see items endpoint)
+  const errors = validationResult(req)
+  if (!errors.isEmpty()){
+    res.status(400).json({errors})
+  }else{
+    try {
+      const { username, email, password } = req.body;
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const user = await User.create({
+        username,
+        email,
+        password: hashedPassword,
+      });
+      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+      res.status(201).json({ user, token });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Server Error" });
+    }
   }
 })
 

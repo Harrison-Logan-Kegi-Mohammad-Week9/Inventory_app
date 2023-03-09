@@ -13,6 +13,7 @@ export const Signup = () =>{
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [mandatoryFieldsError, setMandatoryFieldsError] = useState(false)
 
     const signupHandler = async(e) => {
         try{
@@ -34,9 +35,11 @@ export const Signup = () =>{
                 )
 		    });
 
-		    if (response.status != 201){
+		    if (response.status == 500){
 		    	window.alert("Account already exists")
-		    }else{
+		    }else if(response.status == 400){
+                setMandatoryFieldsError(true)
+            }else if (response.status == 201){
                 setSignup(true)
             }
         }
@@ -49,16 +52,17 @@ export const Signup = () =>{
         return (
             <main>	
                 <div className='container'>
-                <form onSubmit={signupHandler}>
-                    <label>Name</label><br></br>
-                    <input type='text' placeholder='Enter name' onChange={e => setName(e.target.value)}></input><br></br>
-                    <label>Email</label><br></br>
-                    <input type='email' placeholder='Enter email' value={email} onChange={e => setEmail(e.target.value)}></input><br></br>
-                    <label>Password</label><br></br>
-                    <input type='password' placeholder='Enter password' value={password} onChange={e => setPassword(e.target.value)}></input><br></br>
-                    <button type='submit' onClick={signupHandler}>Create account</button>
-                </form><br></br>
-                <Link to="/"><button>Go Back</button></Link>
+                    {mandatoryFieldsError && <p id='error'>Please fill out all fields</p>}
+                    <form onSubmit={signupHandler}>
+                        <label>Name</label><br></br>
+                        <input type='text' placeholder='Enter name' onChange={e => setName(e.target.value)}></input><br></br>
+                        <label>Email</label><br></br>
+                        <input type='email' placeholder='Enter email' value={email} onChange={e => setEmail(e.target.value)}></input><br></br>
+                        <label>Password</label><br></br>
+                        <input type='password' placeholder='Enter password' value={password} onChange={e => setPassword(e.target.value)}></input><br></br>
+                        <button type='submit' onClick={signupHandler}>Create account</button>
+                    </form><br></br>
+                    <Link to="/"><button>Go Back</button></Link>
                 </div>
             </main>
         )
