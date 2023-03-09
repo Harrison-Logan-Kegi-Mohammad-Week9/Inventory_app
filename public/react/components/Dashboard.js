@@ -31,15 +31,26 @@ export const Dashboard = () => {
     navigate('/')
   }
 
+  const itemView = (i) =>{
+    const id = i+1
+    console.log(id)
+    sessionStorage.setItem('itemId', JSON.stringify(id))
+    navigate('/item')
+  }
+
   return userData ? (<>
-    <h2>LOGGED IN</h2>
-    <h3>Welcome {userData.username}</h3>
-    <div className='items-box'>
-    {items.map((item, i) => <img key={i} className="items-dashboard" src={item.image} />)}
-    </div>
-    <button onClick={() => setIsAddingItem(!isAddingItem)}>ADD ITEM</button>
-    <button onClick={logout}>Logout</button>
-    {isAddingItem && <AddForm setIsAddingItem={setIsAddingItem}/>}
+      <h2>LOGGED IN</h2>
+      <h3>Welcome {userData.username}</h3>
+      <div className='items-box'>
+        {items.map((item, i) => 
+          <a onClick={() => itemView(i)}>
+            <img key={i} className="items-dashboard" src={item.image} />
+          </a>
+        )}
+      </div>
+      <button onClick={() => setIsAddingItem(!isAddingItem)}>ADD ITEM</button>
+      <button onClick={logout}>Logout</button>
+      {isAddingItem && <AddForm setIsAddingItem={setIsAddingItem}/>}
     </>
   ): null
 };

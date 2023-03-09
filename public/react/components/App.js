@@ -6,6 +6,7 @@ import apiURL from '../api'
 import { Dashboard } from './Dashboard';
 import { Login } from "./Login"
 import { Signup } from "./Signup"
+import { SingleItem } from "./SingleItem"
 
 export const App = () => {
 	return <>
@@ -13,6 +14,7 @@ export const App = () => {
 		<Route exact path="/" element={<Login />} />
 		<Route path="signup" element={<Signup/>} />
 		<Route path="dashboard" element={<Dashboard/>} />
+		<Route path="item" element={<SingleItem/>} />
   </Routes>
   </>
 }
