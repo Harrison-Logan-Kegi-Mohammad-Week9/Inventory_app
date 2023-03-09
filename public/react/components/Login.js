@@ -10,6 +10,8 @@ export const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [loggedIn, setLoggedIn] = useState(false)
+	const [credentialsError, setCredentialsError] = useState(false)
+	const [fieldsError, setFieldsError] = useState(false)
 	
 
 	const submitHandler = async(e) =>{
@@ -32,9 +34,8 @@ export const Login = () => {
 		console.log(response)
 		if (response.status == 200){
 			setLoggedIn(true)
-		}else{
-			console.log(response)
-			window.alert("Email or Password is incorrect")
+		}else if(response.status == 401){
+			setCredentialsError(true)
 		}
 	}
 
@@ -42,14 +43,15 @@ export const Login = () => {
 		return (
 			<main>	
 				<div className='container'>
-				<form onSubmit={submitHandler} id='login-form'>
-					<label>Email</label><br></br>
-					<input type='email' placeholder='Enter email' value={email} onChange={e => setEmail(e.target.value)}></input><br></br>
-					<label>Password</label><br></br>
-					<input type='password' placeholder='Enter password' value={password} onChange={e => setPassword(e.target.value)}></input><br></br>
-					<button type='submit'>Log in</button>
-				</form><br></br>
-				<button onClick={() => navigate('/signup')}>Sign Up</button>
+					{credentialsError && <p id='error'>Username or password is incorrect</p>}
+					<form onSubmit={submitHandler} id='login-form'>
+						<label>Email</label><br></br>
+						<input type='email' placeholder='Enter email' value={email} onChange={e => setEmail(e.target.value)}></input><br></br>
+						<label>Password</label><br></br>
+						<input type='password' placeholder='Enter password' value={password} onChange={e => setPassword(e.target.value)}></input><br></br>
+						<button type='submit'>Log in</button>
+					</form><br></br>
+					<button onClick={() => navigate('/signup')}>Sign Up</button>
 				</div>
 			</main>
 		)
