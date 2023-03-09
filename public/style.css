@@ -46,6 +46,9 @@ button:hover {
 .items-dashboard{
   max-width: 5%;
 }
+.items-single-view {
+  max-width: 20%;
+}
 
 .items-box {
   width: 100%;
@@ -57,4 +60,8 @@ button:hover {
 }
 #mandatory{
   color:red
+}
+
+.hovering {
+  cursor: pointer;
 }

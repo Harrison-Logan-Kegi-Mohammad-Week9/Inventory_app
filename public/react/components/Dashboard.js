@@ -33,6 +33,7 @@ export const Dashboard = () => {
 
   const logout = () => {
     sessionStorage.removeItem('email')
+    window.alert("Successfully Logged Out!")
     navigate('/')
   }
 
@@ -47,21 +48,21 @@ export const Dashboard = () => {
   }
 
   return userData ? (<>
-      <h2>LOGGED IN</h2>
-      <h3>Welcome {userData.username}</h3>
+      <h2>Welcome {userData.username}</h2>
+      <h3>Click the items below for inventory details</h3><br></br>
       <div className='items-box'>
         {items.map((item, i) => 
           <a onClick={() => itemView(item.id)}>
-            <img key={item.id} className="items-dashboard" src={item.image} />
+            <img key={item.id} className="items-dashboard hovering" src={item.image} />
           </a>
         )}
       </div>
-      <button onClick={() => setIsAddingItem(!isAddingItem)}>ADD ITEM</button><br></br><br></br>
-      <button onClick={() => setIsSearching(!isSearching)}>SEARCH</button><br></br><br></br>
+      <button onClick={() => setIsAddingItem(!isAddingItem)}>{isAddingItem ? "CLOSE" : "ADD ITEM"}</button><br></br><br></br>
+      {isAddingItem && <AddForm setIsAddingItem={setIsAddingItem}/>}
+      <button onClick={() => setIsSearching(!isSearching)}>{isSearching ? "CLOSE" : "SEARCH"}</button><br></br><br></br>
+      {isSearching && <SearchForm setIsSearching={setIsSearching} setItems={setItems} setIsFiltered={setIsFiltered}/>}
       {isFiltered && <><button onClick={removeFilter}>Get All Results</button><br></br><br></br></>}
       <button onClick={logout}>Logout</button>
-      {isAddingItem && <AddForm setIsAddingItem={setIsAddingItem}/>}
-      {isSearching && <SearchForm setIsSearching={setIsSearching} setItems={setItems} setIsFiltered={setIsFiltered}/>}
     </>
   ): null
 };

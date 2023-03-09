@@ -40,6 +40,7 @@ export const SingleItem = () =>{
         }else{
             setDeletingItem(!deletingItem)
             sessionStorage.removeItem('itemId')
+            window.alert("Item has successfully been deleted!")
             navigate('/dashboard')
         }
     }
@@ -47,13 +48,14 @@ export const SingleItem = () =>{
     return <div>
         <section>
             <h1>{itemData.title}</h1><br/>
-            <img src={itemData.image}/><br/>
+            <img className="items-single-view" src={itemData.image}/><br/>
             <p><span>Category:</span> {itemData.category}</p><br/>
             <p><span>Description:</span> {itemData.description}</p><br/>
             <p><span>Price:</span> £{itemData.price}</p><br/>
-            <button onClick={() => editItem()}>EDIT ITEM</button>
+            <button onClick={() => editItem()}>EDIT ITEM</button><br></br><br></br>
             {editingItem && <EditForm setEditingItem={setEditingItem} itemData={itemData}/>}
-            <button onClick={() => deleteItem()}>DELETE ITEM</button>
+            <button onClick={() => deleteItem()}>DELETE ITEM</button><br></br><br></br>
+            <button onClick={() => navigate('/dashboard')}>GO BACK</button>
             {itemNotFound && <p id='error'>Item not found</p>}
         </section>
     </div>

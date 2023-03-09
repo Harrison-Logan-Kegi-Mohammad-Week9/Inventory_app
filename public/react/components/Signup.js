@@ -52,8 +52,9 @@ export const Signup = () =>{
         return (
             <main>	
                 <div className='container'>
+                <h1>Signup Page</h1><br></br><br></br>
                     {mandatoryFieldsError && <p id='error'>Please fill out all fields</p>}
-                    <form onSubmit={signupHandler}>
+                    <form onSubmit={signupHandler} id="login-form">
                         <label>Name</label><br></br>
                         <input type='text' placeholder='Enter name' onChange={e => setName(e.target.value)}></input><br></br>
                         <label>Email</label><br></br>

@@ -70,7 +70,7 @@ export const SearchForm = (props) => {
                     <label>Category</label><span id='mandatory'>*</span><br></br>
                     <select onChange={(e) => setChosenCategory(e.target.value)}>
                         {optionList.map(option => <option value={option}>{option}</option>)}    
-                    </select><br></br>
+                    </select><br></br><br></br>
                     <button type='submit' onClick={search}>Search</button>
                 </form><br></br>
             </div>

@@ -41,8 +41,9 @@ export const Login = () => {
 
 	if (!loggedIn){
 		return (
-			<main>	
+			<main>
 				<div className='container'>
+					<h1>Login Page</h1><br></br><br></br>	
 					{credentialsError && <p id='error'>Username or password is incorrect</p>}
 					<form onSubmit={submitHandler} id='login-form'>
 						<label>Email</label><br></br>

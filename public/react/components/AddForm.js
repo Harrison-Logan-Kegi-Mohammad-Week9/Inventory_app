@@ -84,9 +84,9 @@ export const AddForm = (props)=>{
                     <input type='text' placeholder='Enter Category' onChange={e => setCategory(e.target.value)}></input><br></br>
                     <label>Image</label><br></br>
                     <input type='file' placeholder='Enter Image' onChange={e => setImage(e.target.files[0])}></input><br></br>
-                    <button onClick={uploadImage}>Upload</button><br></br><br></br>
-                    {uploaded && <p>Photo successfully uploaded</p>}
-                    <button type='submit' onClick={add}>Add item</button>
+                    <button onClick={uploadImage}>Upload Image</button><br></br><br></br>
+                    {uploaded && <><p>Photo successfully uploaded</p><br></br></>}
+                    <button type='submit' onClick={add}>CONFIRM ITEM</button>
                 </form><br></br>
             </div>
         </main>

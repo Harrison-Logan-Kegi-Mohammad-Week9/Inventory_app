@@ -61,6 +61,7 @@ export const EditForm = (props)=>{
                 setError(true)
             }else{
                 props.setEditingItem(false)
+                window.alert("Item has successfully been updated!")
             }
         }
         catch(e){
@@ -73,6 +74,7 @@ export const EditForm = (props)=>{
             <div className='container'>
                 {error && <p id='error'>Please fill in all mandatory fields</p>}
                 <form onSubmit={edit}>
+                    <h2>Edit Item</h2><br></br>
                     <label>Title<span id='mandatory'>*</span></label><br></br>
                     <input type='text' placeholder='Enter Title' value={title} onChange={e => setTitle(e.target.value)}></input><br></br>
                     <label>Description</label><br></br>
@@ -83,8 +85,8 @@ export const EditForm = (props)=>{
                     <input type='text' placeholder='Enter Category' value={category} onChange={e => setCategory(e.target.value)}></input><br></br>
                     <label>Image</label><br></br>
                     <input type='file' placeholder='Enter Image'  onChange={e => setImage(e.target.files[0])}></input><br></br>
-                    <button onClick={uploadImage}>Upload Image</button>
-                    {uploaded && <p>Photo successfully uploaded</p>}
+                    {uploaded && <><p>Photo successfully uploaded</p><br></br></>}
+                    <button onClick={uploadImage}>Upload Image</button><br></br><br></br>
                     <button type='submit' onClick={edit}>Save Changes</button>
                 </form><br></br>
             </div>
