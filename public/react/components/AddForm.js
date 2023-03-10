@@ -69,10 +69,9 @@ export const AddForm = (props)=>{
     }
 
     return (
-        <main>	
-            <div className='container'>
+            <div className='dashboard-container'>
                 {error && <p id='error'>Please fill in all mandatory fields</p>}
-                <form onSubmit={add}>
+                <form className='dashboard-form' onSubmit={add}>
                     <h2>Add New Item</h2><br></br>
                     <label>Title<span id='mandatory'>*</span></label><br></br>
                     <input type='text' placeholder='Enter Title' onChange={e => setTitle(e.target.value)}></input><br></br>
@@ -89,7 +88,6 @@ export const AddForm = (props)=>{
                     <button type='submit' onClick={add}>CONFIRM ITEM</button>
                 </form><br></br>
             </div>
-        </main>
     )
 }
 

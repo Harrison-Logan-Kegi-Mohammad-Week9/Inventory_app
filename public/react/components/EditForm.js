@@ -70,10 +70,10 @@ export const EditForm = (props)=>{
     }
 
     return (
-        <main>	
-            <div className='container'>
+        <main className='edit-container'>	
+            <div className='edit-form'>
                 {error && <p id='error'>Please fill in all mandatory fields</p>}
-                <form onSubmit={edit}>
+                <form className='dashboard-form' onSubmit={edit}>
                     <h2>Edit Item</h2><br></br>
                     <label>Title<span id='mandatory'>*</span></label><br></br>
                     <input type='text' placeholder='Enter Title' value={title} onChange={e => setTitle(e.target.value)}></input><br></br>

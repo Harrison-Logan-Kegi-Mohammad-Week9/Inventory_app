@@ -50,20 +50,22 @@ export const Signup = () =>{
 
     if (signup == false){
         return (
-            <main>	
-                <div className='container'>
+            <main className='form-bg'>	
+                <div className='form-container'>
                 <h1>Signup Page</h1><br></br><br></br>
                     {mandatoryFieldsError && <p id='error'>Please fill out all fields</p>}
-                    <form onSubmit={signupHandler} id="login-form">
+                    <form onSubmit={signupHandler} className="form">
                         <label>Name</label><br></br>
                         <input type='text' placeholder='Enter name' onChange={e => setName(e.target.value)}></input><br></br>
                         <label>Email</label><br></br>
                         <input type='email' placeholder='Enter email' value={email} onChange={e => setEmail(e.target.value)}></input><br></br>
                         <label>Password</label><br></br>
                         <input type='password' placeholder='Enter password' value={password} onChange={e => setPassword(e.target.value)}></input><br></br>
+                        <div className='button-list'>
                         <button type='submit' onClick={signupHandler}>Create account</button>
+                        <Link className='form-link' to="/">Already have an account?</Link>
+                        </div>
                     </form><br></br>
-                    <Link to="/"><button>Go Back</button></Link>
                 </div>
             </main>
         )

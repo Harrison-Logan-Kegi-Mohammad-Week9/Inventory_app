@@ -64,8 +64,8 @@ export const SearchForm = (props) => {
 
     return (
         <main>	
-            <div className='container'>
-                <form onSubmit={search}>
+            <div className='dashboard-container'>
+                <form className='dashboard-form' onSubmit={search}>
                     <h2>Filter By Category</h2><br></br>
                     <label>Category</label><span id='mandatory'>*</span><br></br>
                     <select onChange={(e) => setChosenCategory(e.target.value)}>
