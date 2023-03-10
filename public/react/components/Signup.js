@@ -59,7 +59,7 @@ export const Signup = () => {
                         <input type='password' placeholder='Enter password' value={password} onChange={e => setPassword(e.target.value)}></input><br></br>
                         <button type='submit' onClick={signupHandler}>Create account</button>
                     </form><br></br>
-                    <Link to="/"><button>Go Back</button></Link>
+                    <Link className='form-link' to="/">Already have an account?</Link>
                 </div>
             </main>
         )

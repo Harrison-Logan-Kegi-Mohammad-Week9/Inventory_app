@@ -46,11 +46,17 @@ input {
 
 }
 
+.form-link {
+  display: block;
+  margin-inline: auto;
+  text-align: center;
+}
+
 
 button {
   border-radius: 5px;
   border: 1px solid #333;
-  width: 50%;
+  width: 100%;
   padding: 1rem;
 }
 

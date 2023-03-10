@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // import and prepend the api url to any fetch calls
 import apiURL from '../api';
@@ -49,7 +49,7 @@ export const Login = () => {
 						<input type='password' placeholder='Enter password' value={password} onChange={e => setPassword(e.target.value)}></input><br></br>
 						<button type='submit'>Log in</button>
 					</form><br></br>
-					<button onClick={() => navigate('/signup')}>Sign Up</button>
+					<Link className='form-link' to='/signup'>Create an account!</Link>
 				</div>
 			</main>
 		)
