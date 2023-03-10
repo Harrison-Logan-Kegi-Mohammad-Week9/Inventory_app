@@ -40,21 +40,29 @@ export const SingleItem = () =>{
         }else{
             setDeletingItem(!deletingItem)
             sessionStorage.removeItem('itemId')
+            window.alert("Item has successfully been deleted!")
             navigate('/dashboard')
         }
     }
 
-    return <div>
+    return <div className='form-bg'>
         <section>
-            <h1>{itemData.title}</h1><br/>
-            <img src={itemData.image}/><br/>
-            <p><span>Category:</span> {itemData.category}</p><br/>
-            <p><span>Description:</span> {itemData.description}</p><br/>
-            <p><span>Price:</span> £{itemData.price}</p><br/>
-            <button onClick={() => editItem()}>EDIT ITEM</button>
-            {editingItem && <EditForm setEditingItem={setEditingItem} itemData={itemData}/>}
-            <button onClick={() => deleteItem()}>DELETE ITEM</button>
-            {itemNotFound && <p id='error'>Item not found</p>}
+            <div className='single-box-item'>
+                <h1 className='header-single-item'>{itemData.title}</h1><br/>
+                <div className='image-container'>
+                    <img className="items-dashboard hovering" src={itemData.image}/><br/>
+                </div>
+                <p><span className='bold'>Category:</span> {itemData.category}</p><br/>
+                <p><span className='bold'>Description:</span> {itemData.description}</p><br/>
+                <p><span className='bold'>Price:</span> £{itemData.price}</p><br/>
+                <div className='button-list'>
+                    <button onClick={() => editItem()}>EDIT ITEM</button><br></br><br></br>
+                    {editingItem && <EditForm setEditingItem={setEditingItem} itemData={itemData}/>}
+                    <button onClick={() => deleteItem()}>DELETE ITEM</button><br></br><br></br>
+                    <button onClick={() => navigate('/dashboard')}>GO BACK</button>
+                    {itemNotFound && <p id='error'>Item not found</p>}
+                </div>
+            </div>
         </section>
     </div>
 }

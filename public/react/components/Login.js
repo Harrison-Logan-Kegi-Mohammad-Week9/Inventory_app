@@ -43,13 +43,17 @@ export const Login = () => {
 		return (
 			<main className='form-bg'>
 				<div className='form-container'>
+					<h1>Login Page</h1><br></br><br></br>	
 					{credentialsError && <p id='error'>Username or password is incorrect</p>}
 					<form onSubmit={submitHandler} className='form'>
+						<label>Email</label><br></br>
 						<input type='email' placeholder='Enter email' value={email} onChange={e => setEmail(e.target.value)}></input><br></br>
 						<input type='password' placeholder='Enter password' value={password} onChange={e => setPassword(e.target.value)}></input><br></br>
-						<button type='submit'>Log in</button>
+						<div className='button-list'>
+							<button type='submit'>Log in</button>
+							<Link className='form-link' to="/signup">Create Account</Link>
+						</div>
 					</form><br></br>
-					<Link className='form-link' to='/signup'>Create an account!</Link>
 				</div>
 			</main>
 		)

@@ -33,6 +33,7 @@ export const Dashboard = () => {
 
   const logout = () => {
     sessionStorage.removeItem('email')
+    window.alert("Successfully Logged Out!")
     navigate('/')
   }
 
@@ -46,23 +47,30 @@ export const Dashboard = () => {
     setIsFiltered(false)
   }
 
-  return userData ? (<>
-      <h2>LOGGED IN</h2>
-      <h3>Welcome {userData.username}</h3>
+  return userData ? (<main className='form-bg'>
+      <h2 id='header'>Welcome {userData.username}</h2>
+      <h3 id='header'>Click the items below for inventory details</h3><br></br>
       <div className='items-box'>
-        {items.map((item, i) => 
+        {items.map((item, i) =>
+        <div className='single-box'> 
           <a onClick={() => itemView(item.id)}>
-            <img key={item.id} className="items-dashboard" src={item.image} />
+            <div className='image-container'>
+              <img key={item.id} className="items-dashboard hovering" src={item.image} />
+            </div>
+            <p>{item.title}</p>
           </a>
+          </div>
         )}
       </div>
-      <button onClick={() => setIsAddingItem(!isAddingItem)}>ADD ITEM</button>
-      <button onClick={() => setIsSearching(!isSearching)}>SEARCH</button>
-      <button onClick={logout}>Logout</button>
-      {isFiltered && <button onClick={removeFilter}>Get All Results</button>}
-      {isAddingItem && <AddForm setIsAddingItem={setIsAddingItem}/>}
-      {isSearching && <SearchForm setIsSearching={setIsSearching} setItems={setItems} setIsFiltered={setIsFiltered}/>}
-    </>
+      <div className='button-list'>
+        <button onClick={() => setIsAddingItem(!isAddingItem)}>{isAddingItem ? "CLOSE" : "ADD ITEM"}</button><br></br><br></br>
+        {isAddingItem && <AddForm setIsAddingItem={setIsAddingItem}/>}
+        <button onClick={() => setIsSearching(!isSearching)}>{isSearching ? "CLOSE" : "SEARCH"}</button><br></br><br></br>
+        {isSearching && <SearchForm setIsSearching={setIsSearching} setItems={setItems} setIsFiltered={setIsFiltered}/>}
+        {isFiltered && <><button onClick={removeFilter}>Get All Results</button><br></br><br></br></>}
+        <button onClick={logout}>Logout</button>
+      </div>
+    </main>
   ): null
 };
 

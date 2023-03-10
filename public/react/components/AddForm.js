@@ -9,6 +9,7 @@ export const AddForm = (props)=>{
     const [price, setPrice] = useState(0)
     const [category, setCategory] = useState('')
     const [image, setImage] = useState('')
+    const [uploaded, setUploaded] = useState(false)
     const [url, setURL] = useState('https://static.thenounproject.com/png/778835-200.png')
     const [error, setError] = useState(false)
 
@@ -25,13 +26,17 @@ export const AddForm = (props)=>{
             })
             const urlData = await response.json()
             setURL(urlData.url)
+            setUploaded(true)
+            setTimeout(() => {
+                setUploaded(false)
+            }, 7000);
         }
         catch(e){
             window.alert('error')
         }
     }
     
-    const addForm = async(e) =>{
+    const add = async(e) =>{
         try{
             e.preventDefault()
             const dataToSend = {
@@ -55,18 +60,19 @@ export const AddForm = (props)=>{
                 setError(true)
             }else{
                 props.setIsAddingItem(false)
+                window.alert("Item successfully added!")
             }
         }
         catch(e){
-            window.alert('something went wrong :(')
+            window.alert('Something went wrong. Item not added.')
         }
     }
 
     return (
-        <main>	
-            <div className='container'>
+            <div className='dashboard-container'>
                 {error && <p id='error'>Please fill in all mandatory fields</p>}
-                <form onSubmit={addForm}>
+                <form className='dashboard-form' onSubmit={add}>
+                    <h2>Add New Item</h2><br></br>
                     <label>Title<span id='mandatory'>*</span></label><br></br>
                     <input type='text' placeholder='Enter Title' onChange={e => setTitle(e.target.value)}></input><br></br>
                     <label>Description</label><br></br>
@@ -77,11 +83,11 @@ export const AddForm = (props)=>{
                     <input type='text' placeholder='Enter Category' onChange={e => setCategory(e.target.value)}></input><br></br>
                     <label>Image</label><br></br>
                     <input type='file' placeholder='Enter Image' onChange={e => setImage(e.target.files[0])}></input><br></br>
-                    <button onClick={uploadImage}>Upload</button>
-                    <button type='submit' onClick={addForm}>Add item</button>
+                    <button onClick={uploadImage}>Upload Image</button><br></br><br></br>
+                    {uploaded && <><p>Photo successfully uploaded</p><br></br></>}
+                    <button type='submit' onClick={add}>CONFIRM ITEM</button>
                 </form><br></br>
             </div>
-        </main>
     )
 }
 
